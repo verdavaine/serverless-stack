@@ -2,6 +2,7 @@ service: notes-app-api2-auto
 # Use serverless-webpack plugin to transpile ES6/ES7
 plugins:
   - serverless-webpack
+  - serverless-offline
 # Enable auto-packing of external modules
 custom:
   # Our stage is based on what is passed in when running serverless
@@ -21,7 +22,7 @@ custom:
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: dev
   region: eu-west-1
 
@@ -113,4 +114,6 @@ functions:
 # Create our resources with separate CloudFormation templates
 resources:
   # DynamoDB
-  - ${file(resources/dynamodb-table.yml)}          
+  - ${file(resources/dynamodb-table.yml)}
+  # S3
+  - ${file(resources/s3-bucket.yml)}          
